@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Word & Character Counter</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #00b09b, #96c93d);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: rgba(255, 255, 255, 0.15);
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      color: #fff;
+      backdrop-filter: blur(10px);
+      width: 400px;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 100px;
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      font-size: 16px;
+      resize: none;
+      outline: none;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 12px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(to right, #43cea2, #185a9d);
+      color: white;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+    }
+
+    #output {
+      margin-top: 20px;
+      font-size: 18px;
+      background: rgba(0, 0, 0, 0.2);
+      padding: 15px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>📝 Word & Character Counter</h2>
+    <textarea id="textInput" placeholder="Type your sentence or paragraph here..."></textarea>
+    <button onclick="countText()">Analyze Text</button>
+    <div id="output">Waiting for input...</div>
+  </div>
+
+  <script>
+    function countText() {
+      const text = document.getElementById("textInput").value.trim();
+
+      if (text.length === 0) {
+        document.getElementById("output").textContent = "⚠️ Please enter some text first.";
+        return;
+      }
+
+      const wordCount = text.split(/\s+/).length;
+      const charCount = text.replace(/\s/g, '').length;
+
+      document.getElementById("output").innerHTML = `
+        📚 <strong>Words:</strong> ${wordCount}<br>
+        ✍️ <strong>Characters (no spaces):</strong> ${charCount}
+      `;
+    }
+  </script>
+
+</body>
+</html>

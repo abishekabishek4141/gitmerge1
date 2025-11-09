@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Auto Changing Background</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      padding-top: 60px;
+      transition: background-color 0.8s ease;
+    }
+
+    button {
+      padding: 14px 28px;
+      font-size: 1.1em;
+      border: none;
+      border-radius: 8px;
+      background: #007BFF;
+      color: white;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    button:hover {
+      background: #0056b3;
+      transform: scale(1.05);
+    }
+
+    #colorCode {
+      margin-top: 25px;
+      font-size: 1.3em;
+      font-weight: bold;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Background changes every 3 seconds</h2>
+  <button id="toggleBtn">Start</button>
+  <div id="colorCode">Current Color: #FFFFFF</div>
+
+  <script>
+    let intervalId = null;
+
+    function getRandomHexColor() {
+      const hex = Math.floor(Math.random() * 0xFFFFFF).toString(16).padStart(6, '0');
+      return `#${hex}`;
+    }
+
+    function changeBackground() {
+      const newColor = getRandomHexColor();
+      document.body.style.backgroundColor = newColor;
+      document.getElementById("colorCode").textContent = "Current Color: " + newColor;
+    }
+
+    document.getElementById("toggleBtn").addEventListener("click", function () {
+      if (intervalId) {
+        clearInterval(intervalId);
+        intervalId = null;
+        this.textContent = "Start";
+      } else {
+        changeBackground(); // change immediately
+        intervalId = setInterval(changeBackground, 3000); // then every 3 seconds
+        this.textContent = "Stop";
+      }
+    });
+  </script>
+
+</body>
+</html>

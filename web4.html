@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Elegant Date & Time</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #f6d365, #fda085);
+      color: #3b3b3b;
+    }
+
+    .datetime-container {
+      background-color: rgba(255, 255, 255, 0.3);
+      padding: 40px 60px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      backdrop-filter: blur(8px);
+    }
+
+    .datetime {
+      font-size: 2rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+      color: #2d3436;
+    }
+
+    .date {
+      font-size: 1.1rem;
+      margin-top: 10px;
+      color: #6c5ce7;
+    }
+
+    .time {
+      font-size: 2.5rem;
+      margin-top: 10px;
+      color: #d63031;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="datetime-container">
+    <div class="datetime" id="weekday">--</div>
+    <div class="date" id="date">--</div>
+    <div class="time" id="time">--:--:--</div>
+  </div>
+
+  <script>
+    function updateDateTime() {
+      const now = new Date();
+
+      const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+      const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", 
+                      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+      const weekday = weekdays[now.getDay()];
+      const day = now.getDate().toString().padStart(2, '0');
+      const month = months[now.getMonth()];
+      const year = now.getFullYear();
+
+      const hours = now.getHours().toString().padStart(2, '0');
+      const minutes = now.getMinutes().toString().padStart(2, '0');
+      const seconds = now.getSeconds().toString().padStart(2, '0');
+
+      document.getElementById('weekday').textContent = weekday;
+      document.getElementById('date').textContent = `${day} ${month} ${year}`;
+      document.getElementById('time').textContent = `${hours}:${minutes}:${seconds}`;
+    }
+
+    setInterval(updateDateTime, 1000);
+    updateDateTime();
+  </script>
+</body>
+</html>
